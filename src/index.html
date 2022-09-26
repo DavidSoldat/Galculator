@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/public/styles.css" />
+    <link
+      rel="icon"
+      href="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/512/Calculator-icon.png"
+    />
+    <script
+      src="https://kit.fontawesome.com/c6327cf6d5.js"
+      crossorigin="anonymous"
+    ></script>
+    <script defer src="app.js"></script>
+    <title>Galculator</title>
+  </head>
+  <body class="flex justify-center items-center">
+    <main class="h-screen w-screen flex justify-center items-center flex-col">
+      <!-- calculator -->
+      <div
+        class="bg-gray-200 h-[550px] w-[450px] border-solid border-4 border-gray-600 p-0 m-0"
+        id="calculator"
+      >
+        <!-- navigation -->
+        <div
+          id="galc-nav"
+          class="bg-gray-600 h-[40px] w-[445px] p-0 m-0 flex items-center justify-center relative"
+        >
+          <div class="absolute left-2">
+            <img
+              src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/512/Calculator-icon.png"
+              alt="logo"
+              class="h-[30px] w-[30px]"
+            />
+          </div>
+          <span class="text-gray-200 font-bold">galculator</span>
+          <div
+            class="flex flex-row-reverse absolute right-2 gap-2"
+            id="nav-btns"
+          >
+            <button id="close">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5 text-gray-200"
+                id="close1"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  id="close2"
+                />
+              </svg>
+            </button>
+            <button id="minimize">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5 text-gray-200"
+                id="minimize1"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25"
+                  id="minimize2"
+                />
+              </svg>
+            </button>
+            <button id="maximize" class="hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5 text-gray-200"
+                id="maximize1"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
+                  id="maximize2"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <!-- screen -->
+        <div class="flex p-2" id="screen-container">
+          <div
+            id="screen"
+            class="bg-white border border-gray-300 h-[60px] w-[430px] p-2 text-4xl font-bold flex justify-end"
+          ></div>
+        </div>
+        <!-- delete row -->
+        <div id="delete-row" class="px-2 gap-2 flex justify-end">
+          <button
+            id="delete-c"
+            class="bg-white border text-sm border-gray-300 px-4 py-1"
+          >
+            C
+          </button>
+          <button
+            id="delete-ac"
+            class="bg-white border text-sm border-gray-300 px-4 py-1"
+          >
+            AC
+          </button>
+          <button
+            id="delete-back"
+            class="bg-white border text-sm border-gray-300 px-4 py-1"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-4 h-4"
+              id="svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                id="path"
+              />
+            </svg>
+          </button>
+        </div>
+        <!-- grid -->
+        <div
+          id="grid"
+          class="grid grid-cols-5 grid-rows-5 px-2 py-2 h-[397px] gap-[5px]"
+        >
+          <button
+            id="oBracked"
+            class="bg-white border text-sm border-gray-300"
+            data-type="absolute"
+          >
+            Abs
+          </button>
+          <button
+            id="cBracket"
+            class="bg-white border text-sm border-gray-300"
+            data-type="exponent"
+          >
+            X <sup>y</sup>
+          </button>
+          <button
+            id="ms"
+            class="bg-white border text-sm border-gray-300"
+            data-type="factorial"
+          >
+            X!
+          </button>
+          <button
+            id="mr"
+            class="border text-sm border-gray-300 disabled:opacity-75"
+            data-type="mr"
+          >
+            MR
+          </button>
+          <button
+            id="m"
+            class="border text-sm border-gray-300 disabled:opacity-75"
+            data-type="m+"
+          >
+            M+
+          </button>
+          <button
+            id="7"
+            class="bg-white border text-sm border-gray-300"
+            data-type="num"
+          >
+            7
+          </button>
+          <button
+            id="8"
+            class="bg-white border text-sm border-gray-300"
+            data-type="num"
+          >
+            8
+          </button>
+          <button
+            id="9"
+            class="bg-white border text-sm border-gray-300"
+            data-type="num"
+          >
+            9
+          </button>
+          <button
+            id="divide"
+            class="bg-white border text-sm border-gray-300"
+            data-type="operator"
+          >
+            /
+          </button>
+          <button
+            id="sqrt"
+            class="bg-white border text-sm border-gray-300"
+            data-type="sqrt"
+          >
+            Sqrt
+          </button>
+          <button
+            id="4"
+            class="bg-white border text-sm border-gray-300"
+            data-type="num"
+          >
+            4
+          </button>
+          <button
+            id="5"
+            class="bg-white border text-sm border-gray-300"
+            data-type="num"
+          >
+            5
+          </button>
+          <button
+            id="6"
+            class="bg-white border text-sm border-gray-300"
+            data-type="num"
+          >
+            6
+          </button>
+          <button
+            id="multiply"
+            class="bg-white border text-sm border-gray-300"
+            data-type="operator"
+          >
+            *
+          </button>
+          <button
+            id="percent"
+            class="bg-white border text-sm border-gray-300"
+            data-type="percent"
+          >
+            %
+          </button>
+          <button
+            id="1"
+            class="bg-white border text-sm border-gray-300"
+            data-type="num"
+          >
+            1
+          </button>
+          <button
+            id="2"
+            class="bg-white border text-sm border-gray-300"
+            data-type="num"
+          >
+            2
+          </button>
+          <button
+            id="3"
+            class="bg-white border text-sm border-gray-300"
+            data-type="num"
+          >
+            3
+          </button>
+          <button
+            id="subtract"
+            class="bg-white border text-sm border-gray-300"
+            data-type="operator"
+          >
+            -
+          </button>
+          <button
+            id="equals"
+            class="bg-white border text-sm border-gray-300 row-span-2"
+            data-type="equals"
+          >
+            =
+          </button>
+          <button
+            id="0"
+            class="bg-white border text-sm border-gray-300"
+            data-type="num"
+          >
+            0
+          </button>
+          <button
+            id="comma"
+            data-type="decimal"
+            class="bg-white border text-sm border-gray-300"
+          >
+            .
+          </button>
+          <button
+            id="signChange"
+            data-type="sign"
+            class="bg-white border text-sm border-gray-300"
+          >
+            +/-
+          </button>
+          <button
+            id="add"
+            class="bg-white border text-sm border-gray-300"
+            data-type="operator"
+          >
+            +
+          </button>
+        </div>
+      </div>
+      <footer
+        class="flex h-20 flex-row px-10 items-center absolute bottom-1 text-gray-600"
+      >
+        <p class="text-xl cursor-default">
+          Copyright © 2022
+          <a href="https://twitter.com/soldat_d00" target="_blank"
+            >David Soldat</a
+          >
+          <span
+            ><a target="_blank" href="https://github.com/DavidSoldat"
+              ><i class="fa-brands fa-github hover:scale-125"></i></a
+          ></span>
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>
